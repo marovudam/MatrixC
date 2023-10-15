@@ -8,8 +8,8 @@ int inverse_matrix(matrix_t *A, matrix_t *result) {
       determinant(A, &det);
       if (!is_eq(det, 0.0)) {
         if (A->rows == 1) {
-          create_matrix(1, 1, result);
-          result->matrix[0][0] = 1 / det;
+          return_code = create_matrix(1, 1, result);
+          if (return_code == OK) result->matrix[0][0] = 1 / det;
         } else {
           matrix_t transposed;
           matrix_t invert;

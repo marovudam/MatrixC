@@ -1,8 +1,5 @@
 #include "matrix.h"
 
-#define SUCCESS 1
-#define FAILURE 0
-
 int eq_matrix(matrix_t *A, matrix_t *B) {
   int return_code = SUCCESS;
   if (A->rows == B->rows && A->columns == B->columns) {

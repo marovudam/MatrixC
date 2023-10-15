@@ -7,13 +7,15 @@
 #define MATRIX_INCORRECT 1
 #define INPUT_INCORRECT 2
 
+#define SUCCESS 1
+#define FAILURE 0
+
 typedef struct matrix_struct {
   double **matrix;
   int rows;
   int columns;
 } matrix_t;
 
-void print_matrix(matrix_t A);
 int is_eq(double a, double b);
 void get_submatrix(matrix_t *A, matrix_t *result, int ignore_row,
                    int ignore_column);
