@@ -6,7 +6,7 @@ int inverse_matrix(matrix_t *A, matrix_t *result) {
     if (A->rows == A->columns) {
       double det;
       determinant(A, &det);
-      if (det != 0.0) {
+      if (!is_eq(det, 0.0)) {
         if (A->rows == 1) {
           create_matrix(1, 1, result);
           result->matrix[0][0] = 1 / det;
