@@ -19,24 +19,22 @@ test: clean_all matrix.a
 	$(CC) -c -o tests/main.o test.c
 	$(CC) -c $(TEST_FILES)
 	$(CC) -lcheck $(TEST_OBJ) tests/main.o matrix.a -o test
-	./test.out
+	./test
 
 clean:
 	rm -rf *.gcda *.gcov *.o *.gcno tests/*.o tests/*.gcno *.info test matrix.a res
 
 lint:
-	-cp ../materials/linters/.clang-format .
-	clang-format -n *.c
+	clang-format -n *.c *.h -style=Google
 
 fix_lint:
-	-cp ../materials/linters/.clang-format .
-	clang-format -i *.c
+	clang-format -i *.c *.h -style=Google
 
 clean_all: clean
-	rm -f matrix.a test.out
+	rm -f matrix.a test
 
 mem_leaks:
-	leaks -atExit -- ./test.out
+	leaks -atExit -- ./test
 
 gcov_report: clean_all $(SOURCE_FILES)
 	$(CC) --coverage -c -g $(SOURCE_FILES)
@@ -45,7 +43,7 @@ gcov_report: clean_all $(SOURCE_FILES)
 	$(CC) -c -o tests/main.o test.c
 	$(CC) -c $(TEST_FILES)
 	$(CC) -lcheck $(TEST_OBJ) --coverage tests/main.o matrix.a -o test
-	- ./test.out
+	- ./test
 	lcov -f -c --directory . -o ./coverage.info
 	genhtml coverage.info --output-directory=res
 	rm -f *.gcda *.gcno

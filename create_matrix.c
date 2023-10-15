@@ -9,9 +9,11 @@ int create_matrix(int rows, int columns, matrix_t *result) {
         result->matrix[i] = (double *)malloc(columns * sizeof(double));
         if (!(result->matrix[i])) {
           return_code = MATRIX_INCORRECT;
+          for (int j = i - 1; j >= 0; j--) {
+            free(result->matrix[j]);
+          }
+          break;
         }
-      }
-      for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
           result->matrix[i][j] = 0.0;
         }
