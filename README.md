@@ -1,4 +1,7 @@
 # MatrixC
+
+_There is a [TODO](TODO.md) to this project!_
+
 Matrices. In C. With some methods to use then.
 + C11
 + `gcc` compiler used
