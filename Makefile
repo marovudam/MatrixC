@@ -45,5 +45,4 @@ coverage: clean $(SOURCE_FILES)
 	- ./test
 	lcov -f -c --directory . -o ./coverage.info
 	genhtml coverage.info --output-directory=res
-	rm -f *.gcda *.gcno
 	open res/index.html
