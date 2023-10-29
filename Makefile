@@ -8,14 +8,16 @@ TEST_OBJ		= create_remove_test.o eq_test.o sum_test.o sub_test.o mult_number_tes
 GCOVF 			= -fprofile-arcs -ftest-coverage
 
 
-all: clean_all matrix.a
+.PHONY: matrix.a test
+
+all: matrix.a
 
 matrix.a:
 	$(CC) $(WARNING) $(C11) -c $(SOURCE_FILES)
 	ar rc matrix.a $(OBJ_FILES)
 	ranlib matrix.a
 
-test: clean_all matrix.a
+test: clean matrix.a
 	$(CC) -c -o tests/main.o test.c
 	$(CC) -c $(TEST_FILES)
 	$(CC) -lcheck $(TEST_OBJ) tests/main.o matrix.a -o test
@@ -30,13 +32,10 @@ lint:
 fix_lint:
 	clang-format -i *.c *.h -style=Google
 
-clean_all: clean
-	rm -f matrix.a test
-
 mem_leaks:
 	leaks -atExit -- ./test
 
-gcov_report: clean_all $(SOURCE_FILES)
+coverage: clean $(SOURCE_FILES)
 	$(CC) --coverage -c -g $(SOURCE_FILES)
 	ar rc matrix.a $(OBJ_FILES)
 	ranlib matrix.a
