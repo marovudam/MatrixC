@@ -14,10 +14,17 @@ Matrices. In C. With some methods to use then.
 + `fix-lint` auto-corrects formatting (uses `clang-format`)
 + `mem-leaks` checks for memory leaks that could occure while running tests. `leaks` utility used, target needs library `<check.h>` to build tests correctly
 
-## Methods implemented
+## Functions implemented
 
-| Method | Description |
-|--------|-------------|
+All functions `except the comparsion` return following codes:
++ **0, or `OK`** - everything was calculated correctly
++ **1, or `INCORRECT MATRIX`** - something went wrong during the calculations. It is mainly used when method cannot allocate some memory
++ **2, or `CALCULATION ERROR`** - calculation cannot be performed with the given parameters. _For example, negative rows value was given to `create_matrix`, matrices of different sizes were given to sum_matrix, etc_
+
+All the functions that write some data into result matrix allocate the memory inside it. _Do not put already created matrices inside them (or else you will have to deal with memory leaks, ha-ha)._
+
+| Function | Description |
+|----------|-------------|
 |`int create_matrix(int rows, int columns, matrix_t *result)`| Creates matrix of `rows * columns` size |
 |`void remove_matrix(matrix_t *A)`| Deallocates all memory in matrix, sets the number of rows an columns to a zero|
 |`int eq_matrix(matrix_t *A, matrix_t *B)`| checks if matrices and ther values are equal (uses 1e7 precision)|
